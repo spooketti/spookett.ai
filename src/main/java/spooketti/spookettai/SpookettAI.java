@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
 
 public class SpookettAI implements ModInitializer {
 	public static final String MOD_ID = "spookettai";
@@ -18,6 +19,11 @@ public class SpookettAI implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+//		ServerMessageEvents.ALLOW_CHAT_MESSAGE.register((message,player,params)-> {
+//			System.out.println(message.getContent().getString());
+//
+//			return true;Z
+//		});
 
 		LOGGER.info("Hello Fabric world!");
 	}

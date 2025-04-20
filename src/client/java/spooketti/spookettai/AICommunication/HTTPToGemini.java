@@ -2,7 +2,7 @@ package spooketti.spookettai.AICommunication;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.concurrent.CompletableFuture;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -11,6 +11,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 
 public class HTTPToGemini {
+    PlayerInformation playerInfo = new PlayerInformation();
     private final String apiKey = System.getenv("API_KEY");
     private final String url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey;
     HttpClient client = HttpClient.newHttpClient();
@@ -20,6 +21,7 @@ public class HTTPToGemini {
     }
 
     public String sanitizeResponse(String input) {
+        input = input.replace("[coordinate]", playerInfo.getPlayerCoord());
         return input.codePoints()
                 .filter(cp ->
                         (cp >= 0x20 && cp != 0x7F) &&                  // printable ASCII, exclude DEL
